@@ -3,6 +3,7 @@ package com.ecomnext.util;
 import scala.collection.JavaConversions;
 import scala.collection.JavaConverters;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,21 +12,21 @@ import java.util.Map;
  */
 public class ScalaSupport {
     public static <T> java.util.List<T> toJavaList(scala.collection.immutable.List<T> scalaList) {
-        return JavaConverters.asJavaListConverter(scalaList).asJava();
-//        return JavaConversions.asJavaList(scalaList);
+        //return (List<T>) JavaConverters.asJavaListConverter(scalaList).asJava();
+        return JavaConversions.seqAsJavaList(scalaList);
     }
 
     public static <T> java.util.List<T> toJavaList(scala.collection.Seq<T> scalaSeq) {
-        return JavaConverters.asJavaListConverter(scalaSeq).asJava();
+        return (List<T>) JavaConverters.seqAsJavaListConverter(scalaSeq).asJava();
 //        return JavaConversions.asJavaList(scalaSeq);
     }
 
     public static <T> scala.collection.immutable.List<T> toScalaList(java.util.List<T> javaList) {
-        return JavaConversions.asScalaIterable(javaList).toList();
+        return JavaConversions.collectionAsScalaIterable(javaList).toList();
     }
 
     public static <T> java.util.Set toJavaSet(scala.collection.Set<T> scalaSet) {
-        return JavaConversions.asJavaSet(scalaSet);
+        return JavaConversions.setAsJavaSet(scalaSet);
     }
 
     public static <T> scala.collection.Set toScalaSet(java.util.Set<T> javaSet) {
@@ -37,10 +38,10 @@ public class ScalaSupport {
     }
 
     public static <K, V> Map<K, V> toJavaMap(scala.collection.Map<K,V> scalaMap) {
-        return JavaConversions.asJavaMap(scalaMap);
+        return JavaConversions.mapAsJavaMap(scalaMap);
     }
 
     public static <K, V> scala.collection.Map<K,V> toScalaMap(Map<K,V> javaMap) {
-        return JavaConversions.asScalaMap(javaMap);
+        return JavaConversions.mapAsScalaMap(javaMap);
     }
 }
