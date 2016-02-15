@@ -55,6 +55,7 @@ public class SecurityServiceClient {
         client = Thrift.client()
             //.withMonitor(monitor)
             .withLabel("Thrift Client")
+            //.withTransport().verbose()
             .withSessionPool().minSize(1) //10
             .withSessionPool().maxSize(5) //20
             .withSessionPool().maxWaiters(100)
