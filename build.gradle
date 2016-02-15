@@ -1,0 +1,57 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'scala'
+apply plugin: 'scrooge'
+
+group = 'com.ecomnext'
+version = '1.0'
+
+description = """finagle-java-integration"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+        
+    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "https://maven.twttr.com/" }
+    mavenCentral()
+    mavenLocal()
+    jcenter()
+    jcenter {
+        url "http://jcenter.bintray.com/"
+    }
+}
+
+buildscript {
+    repositories() {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.yodle.griddle:griddle:1.7'
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs =  []
+        }
+        scala {
+            srcDirs =  ['build/gen-src', 'src/main/java']
+        }
+   }
+}
+
+//non-standard configuration
+thriftSrcDir = "${projectDir}/src/main/thrift"
+
+dependencies {
+    //compile group: 'org.apache.thrift', name: 'libthrift', version:'0.7.0'
+    //compile 'com.twitter:scrooge-maven-plugin:4.5.0'
+    scroogeGen 'com.twitter:scrooge-generator_2.11:4.5.0'
+    compile group: 'com.twitter', name: 'scrooge-core_2.11', version:'4.5.0'
+    compile group: 'com.twitter', name: 'scrooge-runtime_2.11', version:'4.5.0'
+    compile group: 'com.twitter', name: 'finagle-thrift_2.11', version:'6.33.0'
+    compile group: 'org.scala-lang', name: 'scala-library', version:'2.11.7'
+}
