@@ -49,13 +49,6 @@ public class SecurityServiceClient {
                 new TBinaryProtocol.Factory(),
                 "MerchantsService",
                 new InMemoryStatsReceiver());
-
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                close();
-            }
-        });
     }
 
     public void close() {

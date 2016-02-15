@@ -17,11 +17,21 @@
     <build>
         <finalName>analytics-finagle-${project.version}</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <!-- or whatever version you use -->
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
             <!-- Generate Finagle scala classes for thrift definitions -->
             <plugin>
                 <groupId>com.twitter</groupId>
                 <artifactId>scrooge-maven-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>4.5.0</version>
                 <configuration>
                     <language>scala</language> <!-- default is scala -->
                     <thriftOpts>
@@ -95,15 +105,15 @@
 
         <dependency>
             <groupId>com.twitter</groupId>
-            <artifactId>scrooge-core_2.9.2</artifactId>
-            <version>3.5.0</version>
+            <artifactId>scrooge-core_2.11</artifactId>
+            <version>4.5.0</version>
         </dependency>
 
         <!-- needed if the "- -finagle" flag is provided -->
         <dependency>
             <groupId>com.twitter</groupId>
-            <artifactId>finagle-thrift_2.9.2</artifactId>
-            <version>6.5.1</version>
+            <artifactId>finagle-thrift_2.11</artifactId>
+            <version>6.33.0</version>
         </dependency>
 
 
@@ -112,7 +122,7 @@
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
-            <version>2.9.2</version>
+            <version>2.11.7</version>
         </dependency>
 
     </dependencies>

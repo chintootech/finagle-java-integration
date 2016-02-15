@@ -63,7 +63,7 @@ public class SecurityServiceImpl implements SecurityService.FutureIface {
             } catch (Exception e) {
                 // An SQLException is not thrown but tries to illustrate how can we treat this kind of errors
                 if (e instanceof SQLException) {
-                    throw new TDataAccessException.Immutable(e.getMessage());
+                    throw new TDataAccessException(e.getMessage());
                 }
                 // Other exceptions like RuntimeException can be handled too
                 else {
@@ -73,7 +73,7 @@ public class SecurityServiceImpl implements SecurityService.FutureIface {
 
             // null cannot be returned directly from a thrift function so we throw an exception
             if (user == null)
-                throw new TNotFoundException.Immutable("");
+                throw new TNotFoundException("");
             else
                 return user;
         }
